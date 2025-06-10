@@ -8,28 +8,27 @@ st.set_page_config(page_title="exRNA Chaos Analyzer", layout="wide")
 
 st.title("Chaos Analysis of exRNA Dynamics Using Lyapunov Exponents")
 st.markdown("""
-This app analyzes extracellular RNA (exRNA) time series data to detect chaotic behavior, especially during pathogen-host interactions. 
-You can upload your own `.csv` file or use the preloaded dataset to start.
+This app analyzes extracellular RNA (exRNA) time series data to detect chaotic behavior during pathogen-host interactions.
 """)
 
-# Sidebar for file upload
-st.sidebar.header("Upload exRNA CSV")
-uploaded_file = st.sidebar.file_uploader("Choose a CSV file", type="csv")
+@st.cache_data
+def load_data():
+    return pd.read_csv("exrna_timeseries_full.csv")
 
-# Load default data if no upload
-if uploaded_file is None:
-    st.sidebar.info("Using default example data.")
-    df = pd.read_csv("sample_data.csv")
-else:
-    df = pd.read_csv(uploaded_file)
+df = load_data()
 
-# Display time series
-st.subheader("Time Series Plot")
-st.line_chart(df.set_index(df.columns[0]))
+# Sidebar to choose condition
+condition = st.sidebar.selectbox("Select Condition", df["condition"].unique())
+filtered = df[df["condition"] == condition]
+
+# Plot time series
+st.subheader(f"Time Series - {condition}")
+avg_df = filtered.groupby("time")["expression"].mean().reset_index()
+st.line_chart(avg_df.set_index("time"))
 
 # Compute Lyapunov Exponent
 st.subheader("Lyapunov Exponent Calculation")
-signal = df.iloc[:, 1].dropna().values
+signal = avg_df["expression"].dropna().values
 
 tau = st.slider("Embedding Delay (τ)", 1, 10, 2)
 m = st.slider("Embedding Dimension (m)", 2, 10, 6)
