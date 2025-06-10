@@ -2,3 +2,4 @@ streamlit
 nolds
 pandas
 matplotlib
+numpy

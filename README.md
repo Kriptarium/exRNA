@@ -1,7 +1,10 @@
 
-# exRNA Chaos Analyzer
+# exRNA Chaos Analyzer (Extended)
 
-This Streamlit app analyzes extracellular RNA (exRNA) time series data using Lyapunov exponents to detect chaotic dynamics.
+This version includes:
+- Lyapunov spectrum analysis
+- Temporal λ trend segmentation
+- Phase interpretation (Stable, Transition, Chaotic)
 
 ## How to Run
 
@@ -9,5 +12,3 @@ This Streamlit app analyzes extracellular RNA (exRNA) time series data using Lya
 pip install -r requirements.txt
 streamlit run app.py
 ```
-
-Upload your own dataset or use the integrated large dataset to explore chaotic behavior in pathogen-host interactions.
