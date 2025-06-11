@@ -1,12 +1,14 @@
 
-# exRNA Chaos Analyzer (Extended)
+# exRNA Chaos Analyzer – Final Scientific Version
 
-This version includes:
-- Lyapunov spectrum analysis
-- Temporal λ trend segmentation
-- Phase interpretation (Stable, Transition, Chaotic)
+This Streamlit app analyzes extracellular RNA (exRNA) time series using Lyapunov exponents. It includes:
 
-## How to Run
+- Scientifically styled captions and interface
+- Segmented Lyapunov analysis with interpretations
+- Lyapunov spectrum visualization and PNG export
+- Downloadable CSV reports
+
+## How to Use
 
 ```bash
 pip install -r requirements.txt
